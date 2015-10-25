@@ -16,5 +16,5 @@
 hs_err_pid*
 
 # Pastas a serem ignoradas
-tomcat/
+tomcat*
 target
