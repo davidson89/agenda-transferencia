@@ -10,7 +10,7 @@
 		</property>
 
 		<property name="connection.url">
-			"jdbc:h2:~/db/h2testrf"
+			"jdbc:h2:mem:h2testrf"
 		</property>
 
 		<property name="connection.username">admin</property>
