@@ -29,7 +29,4 @@ public class BusinessException extends Exception {
 	public String getMessage() {
 		return super.getMessage();
 	}
-	
-	
-
 }
