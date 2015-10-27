@@ -15,6 +15,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PersistenceException;
 import javax.persistence.Transient;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import br.com.test.rf.agendaTransf.dao.persist.api.Persistable;
 import br.com.test.rf.agendaTransf.dao.persist.api.Persister;
 
@@ -26,6 +28,9 @@ import br.com.test.rf.agendaTransf.dao.persist.api.Persister;
 @MappedSuperclass
 public abstract class AbstractPersistableObject implements Persistable, Serializable {
 
+	@Autowired
+	private PersisterObject persister;
+
 	private static Map<Class<? extends AbstractPersistableObject>, Method> getterCache = new ConcurrentHashMap<Class<? extends AbstractPersistableObject>, Method>();
 	
     private static Map<Class<? extends AbstractPersistableObject>, Field> fieldCache =
@@ -36,7 +41,7 @@ public abstract class AbstractPersistableObject implements Persistable, Serializ
 	 */
     @Transient
 	public Persister getPersister() {
-		return new PersisterObject(this);
+		return persister;
 	}
 
 	/**
