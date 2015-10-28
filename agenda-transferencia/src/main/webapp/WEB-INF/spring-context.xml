@@ -47,7 +47,4 @@ http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	
-	<bean class="br.com.test.rf.agendaTransf.dao.persist.impl.PersisterObject" />
-
 </beans>

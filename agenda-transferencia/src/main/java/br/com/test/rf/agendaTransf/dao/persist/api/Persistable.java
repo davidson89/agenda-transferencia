@@ -13,6 +13,4 @@ public interface Persistable {
 	
 	public Serializable getPk();
 	
-	@Transient
-	public Persister getPersister();
 }

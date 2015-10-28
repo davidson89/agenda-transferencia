@@ -30,7 +30,7 @@ public class Agente extends AbstractPersistableObject {
 	 * @return the cpfCnpj
 	 */
 	@Id
-	@Column(name="ID")
+	@Column(name="CPF_CNPJ")
 	public String getCpfCnpj() {
 		return cpfCnpj;
 	}

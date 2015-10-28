@@ -1,11 +1,7 @@
-/**
- * 
- */
 package br.com.test.rf.agendaTransf.dao.persist.impl;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,10 +11,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PersistenceException;
 import javax.persistence.Transient;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import br.com.test.rf.agendaTransf.dao.persist.api.Persistable;
-import br.com.test.rf.agendaTransf.dao.persist.api.Persister;
 
 /**
  * @author "davidson.rodrigues"
@@ -28,21 +21,10 @@ import br.com.test.rf.agendaTransf.dao.persist.api.Persister;
 @MappedSuperclass
 public abstract class AbstractPersistableObject implements Persistable, Serializable {
 
-	@Autowired
-	private PersisterObject persister;
-
 	private static Map<Class<? extends AbstractPersistableObject>, Method> getterCache = new ConcurrentHashMap<Class<? extends AbstractPersistableObject>, Method>();
 	
     private static Map<Class<? extends AbstractPersistableObject>, Field> fieldCache =
             new ConcurrentHashMap<Class<? extends AbstractPersistableObject>, Field>();
-
-	/**
-	 * {@inheritDoc}
-	 */
-    @Transient
-	public Persister getPersister() {
-		return persister;
-	}
 
 	/**
 	 * Devolve a chave primária.
