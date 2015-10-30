@@ -25,19 +25,11 @@ label {
 }
 
 div {
-
 	text-align: left;
 }
 
 /* header and footer elements */
 
-#wrap {
-	margin:10px; 	
-  	top: 0px;
-  	left:0px;
-  	text-align:left;  	
-
-}
 #main {
   	margin:0 auto;
   	position:relative;
@@ -46,11 +38,6 @@ div {
   	left:10px;  	 
   	text-align:left;
 }
-
-#body {
-	min-height:250px;
-}
-
 
 /* menu elements*/
 
@@ -114,11 +101,6 @@ a:visited {
 li {
 	padding-top: 5px;
 	text-align: left;
-}
-
-
-li ul li ul {
-	list-style: circle none;
 }
 
 /* table consulta */
@@ -282,35 +264,14 @@ fieldset th {
 	color:#888888;
 }
 
-
-
-
-#menu {
-    background: #eee;
-  	position:relative;
-  	float:left;  	
-  	top: 35px;
-  	left:0px;
-  	width:200px;
+#menu ul {
+	padding:0px;
+	margin:0px;
+	background-color:#FFFFFF;
+	list-style:none;
 }
 
-#menu ul{
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-#menu ul li{
-	padding: 0px;
-}
-
-
-#menu a, #menu h2 {
-	display: block;
-	margin: 0;
-	padding: 2px 6px;
-	color:#FFFFFF;
-}
+#menu ul li { display: inline; }
 
 #menu h2 {
 	color: #fff;
@@ -318,13 +279,6 @@ fieldset th {
 	text-transform: uppercase;
 	font-weight:bold;
 	font-size: 1em;
-}
-
-#menu a {
-	color: #666666;
-	background: #eee;
-	text-decoration: none;
-	padding: 2px 12px;
 }
 
 #menu a:hover {

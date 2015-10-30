@@ -5,6 +5,7 @@ package br.com.test.rf.agendaTransf.domain;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -107,7 +108,7 @@ public class Conta extends AbstractPersistableObject {
 	/**
 	 * @return the agente
 	 */
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name="CPF_CNPJ")
 	public Agente getAgente() {
 		return agente;
