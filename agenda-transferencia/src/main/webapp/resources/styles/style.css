@@ -9,9 +9,7 @@ body,div,td {
 body {
 	background-color: #fff;
 	min-width: 800px;
-	margin-top: 0px;
-	margin-left: auto;
-	margin-right: auto;
+	margin-top: -10px;
 }
 
 .formContainer {
@@ -31,12 +29,11 @@ div {
 /* header and footer elements */
 
 #main {
-  	margin:0 auto;
-  	position:relative;
+  	margin: 0 auto;
+	width: 100%;
   	float:left;  	
   	top: 34px;
   	left:10px;  	 
-  	text-align:left;
 }
 
 /* menu elements*/
@@ -51,18 +48,15 @@ h1,h2,h3 {
 }
 
 h1 {
-	font-size: 20px;
-	line-height: 26px;
+	font-size: 18px;
 }
 
 h2 {
 	font-size: 18px;
-	line-height: 24px;
 }
 
 h3 {
 	font-size: 15px;
-	line-height: 21px;
 	color:#555;
 }
 
@@ -99,7 +93,7 @@ a:visited {
 
 
 li {
-	padding-top: 5px;
+	padding-top: 2px;
 	text-align: left;
 }
 
@@ -139,7 +133,17 @@ table thead.consulta {
 	font-weight: bold;
 	font-style: italic;
 	background-color: #688B9A;
-	text-transform: uppercase;	
+	text-transform: uppercase;
+}
+
+table.resultado td{
+	padding: 2px;
+	border: 1px solid  #8B8682;
+}
+
+table.cadastro {
+	padding: 2px;
+	border: 1px solid  #8B8682;
 }
 
 /*Tabela de elementos*/
@@ -148,17 +152,13 @@ table {
 	margin: 2px 0 0 0;
 	border: 1px solid #000000;
 	border-collapse: collapse;
+	width: 100%;
 }
 
 table table {
 	margin: -5px 0;
 	border: 0px solid #000000;
 	width: 100%;
-}
-
-table td{
-	padding: 2px;
-	border: 1px solid  #000000;
 }
 
 table th {
@@ -183,65 +183,6 @@ table thead {
 
 table a:link {color: #303030;}
 
-caption {
-	caption-side: top;
-	width: auto;
-	text-align: left;
-	font-size: 12px;
-	color: #848f73;
-	padding-bottom: 4px;
-}
-
-fieldset {
-	background: #fcf1d1;
-	padding: 8px;
-	padding-bottom: 22px;
-	border: none;
-	width: 560px;
-}
-
-fieldset label {
-	width: 70px;
-	float: left;
-	margin-top: 1.7em;
-	margin-left: 20px;
-}
-
-fieldset textfield {
-	margin: 3px;
-	height: 20px;
-	background: #fcf1d1;
-}
-
-fieldset textarea {
-	margin: 3px;
-	height: 165px;
-	background: #fcf1d1;
-}
-
-fieldset input {
-	margin: 3px;
-	height: 20px;
-	background: #fcf1d1;
-}
-
-fieldset table {
-	width: 100%;
-}
-
-fieldset th {
-	padding-left: 25px;
-}
-
-.table-buttons {
-	background-color:#fff;
-	border:none;
-}
-
-.table-buttons td {
-	border:none;
-}
-
 .submit input {
 	border: 1px solid #BBBBBB;
 	color:#777777;
@@ -264,24 +205,63 @@ fieldset th {
 	color:#888888;
 }
 
-#menu ul {
+#menu {
+	background: #EEE9E9;
+}
+
+#menu ul { 
+	width="5%";
 	padding:0px;
 	margin:0px;
-	background-color:#FFFFFF;
+	background: #2F4F4F;
 	list-style:none;
+	padding: 6px;
 }
 
 #menu ul li { display: inline; }
 
-#menu h2 {
-	color: #fff;
-	background: #688B9A;
+#menu h1 {
+	color: #ee;
+	background: #EEE9E9;
 	text-transform: uppercase;
 	font-weight:bold;
 	font-size: 1em;
+	text-align: center
+}
+
+#menu h2 {
+	color: #ee;
+	background: #EEE9E9;
+	text-transform: uppercase;
+	font-weight:bold;
+	font-size: 25px;
+	text-align: center
+}
+
+#menu a {
+	color: #FFFFFF;
+	background: #9400D3;
+	text-decoration: none;
+	padding: 6px;
 }
 
 #menu a:hover {
-	color: #47697e;
-	background: #fff;
+	background: #00BFFF;
+}
+
+table.resultado tr:nth-child(even) {background: #CDC5BF}
+table.resultado tr:nth-child(odd) {background: #EEE5DE}
+
+div.content div {
+	min-height: 50px;
+}
+
+div.content {
+	min-height: 475px;
+}
+
+div.footer {
+	background: #2F4F4F;
+	color: #fff;
+	margin-bottom: -10px;
 }

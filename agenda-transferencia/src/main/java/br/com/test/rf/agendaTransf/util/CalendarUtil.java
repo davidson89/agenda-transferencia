@@ -1,6 +1,10 @@
 package br.com.test.rf.agendaTransf.util;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @copy of
@@ -9,12 +13,14 @@ import java.util.Calendar;
  */
 public class CalendarUtil {
 
-	public static Calendar testData;
+	public static final String DD_MM_YYYY = "dd/MM/yyyy";
+	
+	private static Calendar date;
 
 	public static Calendar getCurrentTime() {
-		if (testData != null) {
-			Calendar result = deepCopy(testData);
-			testData = null;
+		if (date != null) {
+			Calendar result = deepCopy(date);
+			date = null;
 			return result;
 		} else {
 			return Calendar.getInstance();
@@ -169,11 +175,26 @@ public class CalendarUtil {
 		dest.setTimeInMillis(timeInMillis);
 		return dest;
 	}
-
+	
+	public static Calendar getCalendar(String format, String date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		Date dt = sdf.parse(date);
+		return getCalendar(dt.getTime());
+	}
+	
+	public static Calendar getCalendarByDefaultFormat(String date) throws ParseException {
+		return getCalendar(DD_MM_YYYY, date);
+	}
+	
 	public static String toYYYYMMDDHHMISS(Calendar calendar) {
 		return String.format("%04d", getYear(calendar)) + String.format("%02d", getMonth(calendar))
 				+ String.format("%02d", getDay(calendar)) + String.format("%02d", get24Hour(calendar))
 				+ String.format("%02d", getMinute(calendar)) + String.format("%02d", getSecond(calendar));
+	}
+	
+	public static String toDDMMYYYY(Calendar calendar) {
+		SimpleDateFormat sdf = new SimpleDateFormat(DD_MM_YYYY);
+		return sdf.format(calendar.getTime());
 	}
 
 	public static int getDaysBetween(Calendar start, Calendar finish) {

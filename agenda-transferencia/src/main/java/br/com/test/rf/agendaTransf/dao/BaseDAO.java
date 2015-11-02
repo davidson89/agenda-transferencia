@@ -36,16 +36,23 @@ public abstract class BaseDAO<T extends Persistable> implements GenericBaseDAO<T
 
 	@SuppressWarnings("unchecked")
 	public T findByPk(Serializable pk) {
-		Session session = this.getEntityManager().unwrap(Session.class);
-		Criteria criteria = session.createCriteria(this.getPersistableClass());
+		Criteria criteria = createCriteria();
 		return (T) criteria.add(Restrictions.idEq(pk)).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
-		Session session = this.getEntityManager().unwrap(Session.class);
-		Criteria criteria = session.createCriteria(this.getPersistableClass());
+		Criteria criteria = createCriteria();
 		return criteria.list();
+	}
+	
+	/**
+	 * 
+	 * @return uma {@link Criteria} da persistable class da classe
+	 */
+	public Criteria createCriteria() {
+		Session session = this.getEntityManager().unwrap(Session.class);
+		return session.createCriteria(this.getPersistableClass());
 	}
 
 	/**

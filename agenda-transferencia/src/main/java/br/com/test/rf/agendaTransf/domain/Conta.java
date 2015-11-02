@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.test.rf.agendaTransf.domain;
 
 import java.math.BigDecimal;
@@ -14,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.stereotype.Repository;
 
@@ -60,7 +58,7 @@ public class Conta extends AbstractPersistableObject {
 	/**
 	 * @return the numeroConta
 	 */
-	@Column(name = "NUMERO_CONTA", nullable = false)
+	@Column(name = "NUMERO_CONTA", nullable = false, unique = true)
 	public String getNumeroConta() {
 		return numeroConta;
 	}
@@ -133,11 +131,19 @@ public class Conta extends AbstractPersistableObject {
 	 */
 	public synchronized void afetarSaldo(BigDecimal valor) throws BusinessException {
 		BigDecimal novoSaldo = this.saldo.add(valor);
-		if (estourouLimite(novoSaldo)) {
+		if (isDebito(valor) && estourouLimite(novoSaldo)) {
 			throw new BusinessException(String.format("O limite foi estourado em R$%.", novoSaldo.add(this.limite)));
 		} else {
 			this.setSaldo(novoSaldo);
 		}
+	}
+
+	/**
+	 * @param valor o valor que afetara o saldo
+	 * @return <code>true</code> caso o valor a afetar o saldo sejá debido, <code>false</code> caso seja credito.
+	 */
+	private boolean isDebito(BigDecimal valor) {
+		return valor.compareTo(BigDecimal.ZERO) < 0;
 	}
 
 	/**

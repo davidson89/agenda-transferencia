@@ -1,6 +1,7 @@
 package br.com.test.rf.agendaTransf.enumx;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Calendar;
 
 import br.com.test.rf.agendaTransf.util.CalendarUtil;
@@ -14,15 +15,15 @@ public enum TipoAgendamento implements AgendamentoStrategy {
 
 	A {
 
-		private final BigDecimal TX_BASE = new BigDecimal(2);
+		private final BigDecimal TX_BASE = new BigDecimal("2.00");
 
-		private final BigDecimal FATOR = new BigDecimal(1.03);
+		private final BigDecimal FATOR = new BigDecimal(0.03);
 
 		/**
 		 * {@inheritDoc}
 		 */
 		public BigDecimal getTaxaAgendamento(BigDecimal valor, Calendar dtOperacao, Calendar dtAgendamento) {
-			return TX_BASE.add(valor.multiply(FATOR));
+			return TX_BASE.add(valor.multiply(FATOR)).setScale(2, RoundingMode.DOWN);
 		}
 
 	},
@@ -30,9 +31,9 @@ public enum TipoAgendamento implements AgendamentoStrategy {
 	B {
 		private final int DIAS_LIMITE = 30;
 
-		private final BigDecimal TX_MAIOR_30_DIAS = new BigDecimal(8);
+		private final BigDecimal TX_MAIOR_30_DIAS = new BigDecimal("8.00");
 
-		private final BigDecimal TX_MENOR_30_DIAS = BigDecimal.TEN;
+		private final BigDecimal TX_MENOR_30_DIAS = new BigDecimal("10.00");
 
 		/**
 		 * {@inheritDoc}
@@ -47,19 +48,19 @@ public enum TipoAgendamento implements AgendamentoStrategy {
 
 	C {
 
-		private final BigDecimal FT_ATE_5_DIAS = new BigDecimal(1.083);
+		private final BigDecimal FT_ATE_5_DIAS = new BigDecimal(0.083);
 		
-		private final BigDecimal FT_ATE_10_DIAS = new BigDecimal(1.074); 
+		private final BigDecimal FT_ATE_10_DIAS = new BigDecimal(0.074); 
 		
-		private final BigDecimal FT_ATE_15_DIAS = new BigDecimal(1.067);
+		private final BigDecimal FT_ATE_15_DIAS = new BigDecimal(0.067);
 		
-		private final BigDecimal FT_ATE_20_DIAS = new BigDecimal(1.054);
+		private final BigDecimal FT_ATE_20_DIAS = new BigDecimal(0.054);
 		
-		private final BigDecimal FT_ATE_25_DIAS = new BigDecimal(1.043);
+		private final BigDecimal FT_ATE_25_DIAS = new BigDecimal(0.043);
 		
-		private final BigDecimal FT_ATE_30_DIAS = new BigDecimal(1.021);
+		private final BigDecimal FT_ATE_30_DIAS = new BigDecimal(0.021);
 		
-		private final BigDecimal FT_MAIOR_30_DIAS = new BigDecimal(1.012);
+		private final BigDecimal FT_MAIOR_30_DIAS = new BigDecimal(0.012);
 		
 		/**
 		 * 
@@ -88,7 +89,7 @@ public enum TipoAgendamento implements AgendamentoStrategy {
 		 */
 		public BigDecimal getTaxaAgendamento(BigDecimal valor, Calendar dtOperacao, Calendar dtAgendamento) {
 			int days = CalendarUtil.getDaysBetween(dtOperacao, dtAgendamento);
-			return this.getFatorPorPeriodo(days).multiply(valor);
+			return this.getFatorPorPeriodo(days).multiply(valor).setScale(2, RoundingMode.DOWN);
 		}
 	},
 	
@@ -104,7 +105,6 @@ public enum TipoAgendamento implements AgendamentoStrategy {
 		 * {@inheritDoc}
 		 */
 		public BigDecimal getTaxaAgendamento(BigDecimal valor, Calendar dtOperacao, Calendar dtAgendamento) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 		

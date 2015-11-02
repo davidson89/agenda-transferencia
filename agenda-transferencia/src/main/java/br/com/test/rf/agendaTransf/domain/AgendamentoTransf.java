@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,6 +19,7 @@ import javax.persistence.Transient;
 
 import br.com.test.rf.agendaTransf.dao.persist.impl.AbstractPersistableObject;
 import br.com.test.rf.agendaTransf.enumx.TipoAgendamento;
+import br.com.test.rf.agendaTransf.util.CalendarUtil;
 
 /**
  * @author "davidson.rodrigues"
@@ -26,6 +29,8 @@ import br.com.test.rf.agendaTransf.enumx.TipoAgendamento;
 @Entity
 @Table(name = "AGENDAMENTO_TRANSF")
 public class AgendamentoTransf extends AbstractPersistableObject {
+	
+	private Long id;
 
 	private Conta contaOrigem;
 
@@ -37,7 +42,23 @@ public class AgendamentoTransf extends AbstractPersistableObject {
 
 	private Calendar dataOperacao;
 
-	private Calendar dataAgendamento;
+	private Calendar dataTransferencia;
+	
+	/**
+	 * @return the id
+	 */
+	@Id
+	@GeneratedValue
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	/**
 	 * @return the contaOrigem
@@ -126,26 +147,44 @@ public class AgendamentoTransf extends AbstractPersistableObject {
 	/**
 	 * @return the dataAgendamento
 	 */
-	@Column(name = "DT_AGEDAMENTO", nullable = false)
+	@Column(name = "DT_TRANSFERENCIA", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	public Calendar getDataAgendamento() {
-		return dataAgendamento;
+	public Calendar getDataTransferencia() {
+		return dataTransferencia;
 	}
 
 	/**
 	 * @param dataAgendamento
 	 *            the dataAgendamento to set
 	 */
-	public void setDataAgendamento(Calendar dataAgendamento) {
-		this.dataAgendamento = dataAgendamento;
+	public void setDataTransferencia(Calendar dataTransferencia) {
+		this.dataTransferencia = dataTransferencia;
 	}
-
+	
+	/**
+	 * 
+	 * @return a data operação formatada
+	 */
+	@Transient
+	public String getDtOpFormatada() {
+		return CalendarUtil.toDDMMYYYY(this.getDataOperacao());
+	}
+	
+	/**
+	 * 
+	 * @return a data transferência formatada
+	 */
+	@Transient
+	public String getDtTransfFormatada() {
+		return CalendarUtil.toDDMMYYYY(this.getDataTransferencia());
+	}
+	
 	/**
 	 * 
 	 * @return o valor da taxa de transferência
 	 */
 	@Transient
 	public BigDecimal getTaxaTransferencia() {
-		return this.getTipoAgendamento().getTaxaAgendamento(valor, this.getDataOperacao(), this.getDataAgendamento());
+		return this.getTipoAgendamento().getTaxaAgendamento(valor, this.getDataOperacao(), this.getDataTransferencia());
 	}
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="main" template="/WEB-INF/views/templates/main.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/templates/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/templates/footer.jsp"/>
+	</definition>
+	<definition name="index" extends="main" >
+		<put-attribute name="title" value="Home"/>
+		<put-attribute name="content" value="/WEB-INF/views/index.jsp"/>
+	</definition>
+	<definition name="contas" extends="main" >
+		<put-attribute name="title" value="Pesquisa Conta"/>
+		<put-attribute name="content" value="/WEB-INF/views/conta/list.jsp"/>
+	</definition>
+	<definition name="contaFormulario" extends="main" >
+		<put-attribute name="title" value="Cadastro Conta"/>
+		<put-attribute name="content" value="/WEB-INF/views/conta/formulario.jsp"/>
+	</definition>
+	<definition name="agendamentos" extends="main" >
+		<put-attribute name="title" value="Pesquisa Agendamento"/>
+		<put-attribute name="content" value="/WEB-INF/views/agendamento/list.jsp"/>
+	</definition>
+	<definition name="agendFormulario" extends="main" >
+		<put-attribute name="title" value="Cadastro Agendamento"/>
+		<put-attribute name="content" value="/WEB-INF/views/agendamento/formulario.jsp"/>
+	</definition>
+</tiles-definitions>
