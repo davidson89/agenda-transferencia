@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.test.rf.agendaTransf.exceptions;
 
 /**

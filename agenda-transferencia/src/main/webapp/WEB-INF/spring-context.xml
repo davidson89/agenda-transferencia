@@ -55,4 +55,9 @@ http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="efetivaAgendListener" class="br.com.test.rf.agendaTransf.listener.EfetivaAgendamentoListener"> 
+		<constructor-arg ref="efetivAgendActor"/>
+	</bean>
+	
 </beans>

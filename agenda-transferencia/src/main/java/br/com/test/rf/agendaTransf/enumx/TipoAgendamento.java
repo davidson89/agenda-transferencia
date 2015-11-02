@@ -17,7 +17,7 @@ public enum TipoAgendamento implements AgendamentoStrategy {
 
 		private final BigDecimal TX_BASE = new BigDecimal("2.00");
 
-		private final BigDecimal FATOR = new BigDecimal(0.03);
+		private final BigDecimal FATOR = new BigDecimal("0.03");
 
 		/**
 		 * {@inheritDoc}
@@ -48,19 +48,19 @@ public enum TipoAgendamento implements AgendamentoStrategy {
 
 	C {
 
-		private final BigDecimal FT_ATE_5_DIAS = new BigDecimal(0.083);
+		private final BigDecimal FT_ATE_5_DIAS = new BigDecimal("0.083");
 		
-		private final BigDecimal FT_ATE_10_DIAS = new BigDecimal(0.074); 
+		private final BigDecimal FT_ATE_10_DIAS = new BigDecimal("0.074"); 
 		
-		private final BigDecimal FT_ATE_15_DIAS = new BigDecimal(0.067);
+		private final BigDecimal FT_ATE_15_DIAS = new BigDecimal("0.067");
 		
-		private final BigDecimal FT_ATE_20_DIAS = new BigDecimal(0.054);
+		private final BigDecimal FT_ATE_20_DIAS = new BigDecimal("0.054");
 		
-		private final BigDecimal FT_ATE_25_DIAS = new BigDecimal(0.043);
+		private final BigDecimal FT_ATE_25_DIAS = new BigDecimal("0.043");
 		
-		private final BigDecimal FT_ATE_30_DIAS = new BigDecimal(0.021);
+		private final BigDecimal FT_ATE_30_DIAS = new BigDecimal("0.021");
 		
-		private final BigDecimal FT_MAIOR_30_DIAS = new BigDecimal(0.012);
+		private final BigDecimal FT_MAIOR_30_DIAS = new BigDecimal("0.012");
 		
 		/**
 		 * 
@@ -95,17 +95,22 @@ public enum TipoAgendamento implements AgendamentoStrategy {
 	
 	D {
 
-		private final BigDecimal FT_ATE_5_DIAS = new BigDecimal(1.083);
+		private final BigDecimal VL_FAIXA_A = new BigDecimal("25000.00");
 		
-		private final BigDecimal FT_ATE_10_DIAS = new BigDecimal(1.074); 
-		
-		private final BigDecimal FT_ATE_15_DIAS = new BigDecimal(1.067);
+		private final BigDecimal VL_FAIXA_B = new BigDecimal("120000.00"); 
 		
 		/**
 		 * {@inheritDoc}
 		 */
 		public BigDecimal getTaxaAgendamento(BigDecimal valor, Calendar dtOperacao, Calendar dtAgendamento) {
-			return null;
+			TipoAgendamento.B.getTaxaAgendamento(valor, dtOperacao, dtAgendamento);
+			if(valor.compareTo(VL_FAIXA_A) <= 0) {
+				return TipoAgendamento.A.getTaxaAgendamento(valor, dtOperacao, dtAgendamento);
+			} else if (valor.compareTo(VL_FAIXA_B) <= 0) {
+				return TipoAgendamento.B.getTaxaAgendamento(valor, dtOperacao, dtAgendamento);
+			} else {
+				return TipoAgendamento.C.getTaxaAgendamento(valor, dtOperacao, dtAgendamento);
+			}
 		}
 		
 	};

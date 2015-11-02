@@ -1,4 +1,4 @@
-package br.com.test.rf.agendaTransf.dao.persist.impl;
+package br.com.test.rf.agendaTransf.domain.persist.impl;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PersistenceException;
 import javax.persistence.Transient;
 
-import br.com.test.rf.agendaTransf.dao.persist.api.Persistable;
+import br.com.test.rf.agendaTransf.domain.persist.api.Persistable;
 
 /**
  * @author "davidson.rodrigues"

@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.com.test.rf.agendaTransf.dao.persist.impl.AbstractPersistableObject;
+import br.com.test.rf.agendaTransf.domain.persist.impl.AbstractPersistableObject;
 
 /**
  * @author "davidson.rodrigues"

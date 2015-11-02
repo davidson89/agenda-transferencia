@@ -1,4 +1,4 @@
-package br.com.test.rf.agendaTransf.dao.persist.api;
+package br.com.test.rf.agendaTransf.domain.persist.api;
 
 import java.io.Serializable;
 

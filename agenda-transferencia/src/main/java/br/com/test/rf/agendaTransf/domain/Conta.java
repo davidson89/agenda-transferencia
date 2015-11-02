@@ -11,11 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.Transient;
 
-import org.springframework.stereotype.Repository;
-
-import br.com.test.rf.agendaTransf.dao.persist.impl.AbstractPersistableObject;
+import br.com.test.rf.agendaTransf.domain.persist.impl.AbstractPersistableObject;
 import br.com.test.rf.agendaTransf.exceptions.BusinessException;
 
 /**
@@ -24,7 +22,7 @@ import br.com.test.rf.agendaTransf.exceptions.BusinessException;
  * @created 23 de out de 2015
  */
 @Entity
-@Table(name="CONTA")
+@Table(name = "CONTA")
 public class Conta extends AbstractPersistableObject {
 
 	private Long id;
@@ -86,7 +84,7 @@ public class Conta extends AbstractPersistableObject {
 	private void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
-	
+
 	/**
 	 * @return the limite
 	 */
@@ -107,7 +105,7 @@ public class Conta extends AbstractPersistableObject {
 	 * @return the agente
 	 */
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name="CPF_CNPJ")
+	@JoinColumn(name = "CPF_CNPJ")
 	public Agente getAgente() {
 		return agente;
 	}
@@ -132,15 +130,18 @@ public class Conta extends AbstractPersistableObject {
 	public synchronized void afetarSaldo(BigDecimal valor) throws BusinessException {
 		BigDecimal novoSaldo = this.saldo.add(valor);
 		if (isDebito(valor) && estourouLimite(novoSaldo)) {
-			throw new BusinessException(String.format("O limite foi estourado em R$%.", novoSaldo.add(this.limite)));
+			throw new BusinessException(String.format("O limite foi estourado em R$%f na conta %s.",
+					novoSaldo.add(this.limite).doubleValue(), numeroConta));
 		} else {
 			this.setSaldo(novoSaldo);
 		}
 	}
 
 	/**
-	 * @param valor o valor que afetara o saldo
-	 * @return <code>true</code> caso o valor a afetar o saldo sejá debido, <code>false</code> caso seja credito.
+	 * @param valor
+	 *            o valor que afetara o saldo
+	 * @return <code>true</code> caso o valor a afetar o saldo sejá debido,
+	 *         <code>false</code> caso seja credito.
 	 */
 	private boolean isDebito(BigDecimal valor) {
 		return valor.compareTo(BigDecimal.ZERO) < 0;
@@ -155,5 +156,14 @@ public class Conta extends AbstractPersistableObject {
 	 */
 	private boolean estourouLimite(BigDecimal novoSaldo) {
 		return novoSaldo.add(this.limite).compareTo(BigDecimal.ZERO) < 0;
+	}
+
+	/**
+	 * 
+	 * @return o valor total disponível na conta, que é o saldo mais o limíte.
+	 */
+	@Transient
+	public BigDecimal getValorTotalDisponivel() {
+		return this.saldo.add(limite);
 	}
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.test.rf.agendaTransf.enumx;
 
 import java.math.BigDecimal;

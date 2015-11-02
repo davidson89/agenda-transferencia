@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import br.com.test.rf.agendaTransf.dao.persist.impl.AbstractPersistableObject;
+import br.com.test.rf.agendaTransf.domain.persist.impl.AbstractPersistableObject;
 import br.com.test.rf.agendaTransf.enumx.TipoAgendamento;
 import br.com.test.rf.agendaTransf.util.CalendarUtil;
 

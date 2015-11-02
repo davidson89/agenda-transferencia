@@ -1,7 +1,6 @@
 package br.com.test.rf.agendaTransf.dao;
 
 import java.io.Serializable;
-import java.lang.reflect.TypeVariable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,8 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.core.GenericTypeResolver;
 
-import br.com.test.rf.agendaTransf.dao.persist.api.Persistable;
-import br.com.test.rf.agendaTransf.dao.persist.api.Persister;
+import br.com.test.rf.agendaTransf.domain.persist.api.Persistable;
 
 /**
  * @author "davidson.rodrigues"
@@ -45,12 +43,12 @@ public abstract class BaseDAO<T extends Persistable> implements GenericBaseDAO<T
 		Criteria criteria = createCriteria();
 		return criteria.list();
 	}
-	
+
 	/**
 	 * 
 	 * @return uma {@link Criteria} da persistable class da classe
 	 */
-	public Criteria createCriteria() {
+	protected Criteria createCriteria() {
 		Session session = this.getEntityManager().unwrap(Session.class);
 		return session.createCriteria(this.getPersistableClass());
 	}
@@ -66,20 +64,21 @@ public abstract class BaseDAO<T extends Persistable> implements GenericBaseDAO<T
 			return persistableType;
 		}
 		try {
-			persistableType =  (Class<? extends T>) GenericTypeResolver.resolveTypeArgument(getClass(), BaseDAO.class);
+			persistableType = (Class<? extends T>) GenericTypeResolver.resolveTypeArgument(getClass(), BaseDAO.class);
 			return persistableType;
 		} catch (IllegalArgumentException e) {
-			throw new PersistenceException("Não foi possível resolver o tipo genérico da classe: " + this.getClass().getName());
+			throw new PersistenceException(
+					"Não foi possível resolver o tipo genérico da classe: " + this.getClass().getName());
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
-	public void save(T persistable){
+	public void save(T persistable) {
 		this.getEntityManager().persist(persistable);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
